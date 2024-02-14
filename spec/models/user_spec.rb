@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+  describe "associations" do
+    it { should have_many(:game_participants) }
+    it { should have_many(:created_games) }
+    it { should have_many(:games) }
+  end
+
   describe "validations" do
     let!(:user) { create(:user) }
 

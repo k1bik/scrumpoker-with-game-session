@@ -10,15 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_12_174937) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_14_180257) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "games", force: :cascade do |t|
-    t.string "name"
-    t.string "esitmates"
+  create_table "game_participants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "game_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_participants_on_game_id"
+    t.index ["user_id"], name: "index_game_participants_on_user_id"
+  end
+
+  create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "estimates", null: false
+    t.uuid "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_games_on_creator_id"
+  end
+
+  create_table "participant_estimates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "game_participant_id", null: false
+    t.string "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_participant_id"], name: "index_participant_estimates_on_game_participant_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -29,4 +48,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_174937) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "game_participants", "games"
+  add_foreign_key "game_participants", "users"
+  add_foreign_key "games", "users", column: "creator_id"
+  add_foreign_key "participant_estimates", "game_participants"
 end
