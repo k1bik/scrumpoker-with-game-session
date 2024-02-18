@@ -2,11 +2,11 @@
   <div class="w-[386px] rounded-3xl py-8 px-4 bg-white mx-auto mt-40">
     <div class="relative flex items-center mb-4">
       <div class="flex-grow border-t border-black"></div>
-      <span class="flex-shrink mx-4 text-xl"><%= t("nav.sign_up") %></span>
+      <span class="flex-shrink mx-4 text-xl"><%= t("nav.login") %></span>
       <div class="flex-grow border-t border-black"></div>
     </div>
     <div class="px-4">
-      <%= form_with(model: @user, url: user_path, class: "flex flex-col space-y-5") do |f| %>
+      <%= form_with(scope: :session, url: session_path, class: "flex flex-col space-y-5") do |f| %>
         <%= f.text_field :name,
                          class: "rounded-md focus:ring-red-400 focus:border-red-400",
                          placeholder: "Name",
@@ -16,17 +16,13 @@
                              class: "rounded-md focus:ring-red-400 focus:border-red-400",
                              placeholder: "Password"
         %>
-        <%= f.password_field :confirm_password,
-                             class: "rounded-md focus:ring-red-400 focus:border-red-400",
-                             placeholder: "Confirm password"
-        %>
-        <%= f.submit t("nav.sign_up"),
+        <%= f.submit t("nav.login"),
                     data: {turbo: false},
                     class: "cursor-pointer px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
         %>
         <div class="flex space-x-1 mx-auto">
-          <span>Have already an account?</span>
-          <%= link_to t("nav.login"), new_session_path, class: "text-red-400 underline hover:text-red-500 duration-500" %>
+          <span>Don't have an account?</span>
+          <%= link_to "Create now", new_user_path, class: "text-red-400 underline hover:text-red-500 duration-500" %>
         </div>
       <% end %>
     </div>
