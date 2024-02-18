@@ -29,9 +29,10 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
+ru:
   nav:
-    sign_up: "Sign up"
-    login: "Login"
+    sign_up: "Зарегистрироваться"
+    login: "Вход"
     scrumpoker: "ScrumPoker"
-    create_new_game: "CREATE NEW GAME"
+    create_new_game: "СОЗДАТЬ НОВУЮ ИГРУ"
+

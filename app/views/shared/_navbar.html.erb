@@ -1,0 +1,22 @@
+<nav class="flex h-20 bg-black w-full px-24 items-center justify-between">
+  <div class="flex space-x-14 items-center">
+    <div class="flex space-x-2.5 items-center">
+      <%= image_tag "logo.svg" %>
+      <%= link_to t("nav.scrumpoker"), root_path, class: "text-white text-xl" %>
+    </div>
+    <%= link_to t("nav.create_new_game"),
+                new_game_path,
+                class: "px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
+    %>
+  </div>
+  <div class="flex space-x-16 items-center">
+    <%= link_to t("nav.sign_up"),
+                root_path,
+                class: "rounded-md p-1.5 bg-white hover:bg-black hover:text-white duration-500"
+    %>
+    <%= link_to t("nav.login"),
+                root_path,
+                class: "text-white rounded-md p-1.5 hover:bg-white hover:text-black duration-500"
+    %>
+  </div>
+</nav>
