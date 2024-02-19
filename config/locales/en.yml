@@ -35,6 +35,9 @@ en:
     login: "Login"
     scrumpoker: "ScrumPoker"
     create_new_game: "CREATE NEW GAME"
+    profile: "Profile"
+    edit_password: "Edit password"
+    logout: "Log out"
   sign_up:
     sign_up: "Sign up"
     name_placeholder: "Name"

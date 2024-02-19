@@ -35,6 +35,9 @@ ru:
     login: "Вход"
     scrumpoker: "ScrumPoker"
     create_new_game: "СОЗДАТЬ НОВУЮ ИГРУ"
+    profile: "Профиль"
+    edit_password: "Редактировать пароль"
+    logout: "Выход"
   sign_up:
     sign_up: "Зарегистрироваться"
     name_placeholder: "Имя"

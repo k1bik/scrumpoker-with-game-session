@@ -10,7 +10,8 @@
         <%= f.text_field :name,
                          class: "rounded-md focus:ring-red-400 focus:border-red-400",
                          placeholder: t("login.name_placeholder"),
-                         autocomplete: "off"
+                         autocomplete: "off",
+                         maxlength: User::NAME_LENGTH
         %>
         <%= f.password_field :password,
                              class: "rounded-md focus:ring-red-400 focus:border-red-400",
