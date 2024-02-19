@@ -35,3 +35,16 @@ en:
     login: "Login"
     scrumpoker: "ScrumPoker"
     create_new_game: "CREATE NEW GAME"
+  sign_up:
+    sign_up: "Sign up"
+    name_placeholder: "Name"
+    password_placeholder: "Password"
+    password_confirmation_placeholder: "Confirm password"
+    have_already_an_account: "Have already an account?"
+    login: "Login"
+  login:
+    login: "Login"
+    name_placeholder: "Name"
+    password_placeholder: "Password"
+    dont_have_an_account: "Don't have an account?"
+    create_now : "Create now"

@@ -4,10 +4,12 @@
       <%= image_tag "logo.svg" %>
       <%= link_to t("nav.scrumpoker"), root_path, class: "text-white text-xl" %>
     </div>
-    <%= link_to t("nav.create_new_game"),
-                new_game_path,
-                class: "px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
-    %>
+    <% if current_user %>
+      <%= link_to t("nav.create_new_game"),
+                  new_game_path,
+                  class: "px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
+      %>
+    <% end %>
   </div>
   <div class="flex space-x-16 items-center">
     <%= link_to t("nav.sign_up"),

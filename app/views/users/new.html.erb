@@ -2,31 +2,32 @@
   <div class="w-[386px] rounded-3xl py-8 px-4 bg-white mx-auto mt-40">
     <div class="relative flex items-center mb-4">
       <div class="flex-grow border-t border-black"></div>
-      <span class="flex-shrink mx-4 text-xl"><%= t("nav.sign_up") %></span>
+      <span class="flex-shrink mx-4 text-xl"><%= t("sign_up.sign_up") %></span>
       <div class="flex-grow border-t border-black"></div>
     </div>
     <div class="px-4">
       <%= form_with(model: @user, url: user_path, class: "flex flex-col space-y-5") do |f| %>
         <%= f.text_field :name,
-                         class: "rounded-md focus:ring-red-400 focus:border-red-400",
-                         placeholder: "Name",
-                         autocomplete: "off"
+                         class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
+                         placeholder: t("sign_up.name_placeholder"),
+                         autocomplete: "off",
+                         maxlength: User::NAME_LENGTH
         %>
         <%= f.password_field :password,
-                             class: "rounded-md focus:ring-red-400 focus:border-red-400",
-                             placeholder: "Password"
+                             class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
+                             placeholder: t("sign_up.password_placeholder")
         %>
-        <%= f.password_field :confirm_password,
+        <%= f.password_field :password_confirmation,
                              class: "rounded-md focus:ring-red-400 focus:border-red-400",
-                             placeholder: "Confirm password"
+                             placeholder: t("sign_up.password_confirmation_placeholder")
         %>
-        <%= f.submit t("nav.sign_up"),
+        <%= f.submit t("sign_up.sign_up"),
                     data: {turbo: false},
                     class: "cursor-pointer px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
         %>
         <div class="flex space-x-1 mx-auto">
-          <span>Have already an account?</span>
-          <%= link_to t("nav.login"), new_session_path, class: "text-red-400 underline hover:text-red-500 duration-500" %>
+          <span><%= t("sign_up.have_already_an_account")%></span>
+          <%= link_to t("sign_up.login"), new_session_path, class: "text-red-400 underline hover:text-red-500 duration-500" %>
         </div>
       <% end %>
     </div>

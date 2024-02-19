@@ -12,4 +12,11 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to render_template :new
     end
   end
+
+  describe "GET #show" do
+    it "renders the show template" do
+      get :show
+      expect(response).to render_template :show
+    end
+  end
 end

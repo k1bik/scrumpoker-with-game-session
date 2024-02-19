@@ -35,4 +35,16 @@ ru:
     login: "Вход"
     scrumpoker: "ScrumPoker"
     create_new_game: "СОЗДАТЬ НОВУЮ ИГРУ"
-
+  sign_up:
+    sign_up: "Зарегистрироваться"
+    name_placeholder: "Имя"
+    password_placeholder: "Пароль"
+    password_confirmation_placeholder: "Подтвердите пароль"
+    have_already_an_account: "У вас уже есть аккаунт?"
+    login: "Вход"
+  login:
+    login: "Вход"
+    name_placeholder: "Имя"
+    password_placeholder: "Пароль"
+    dont_have_an_account: "У вас нет аккаунта?"
+    create_now : "Создать сейчас"

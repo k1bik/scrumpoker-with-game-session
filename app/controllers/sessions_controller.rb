@@ -1,28 +1,28 @@
 class SessionsController < ApplicationController
   def new; end
 
-  # def create
-  #   user = User.find_by(nickname: session_params[:nickname])&.authenticate(session_params[:password])
+  def create
+    user = User.find_by(name: session_params[:name])&.authenticate(session_params[:password])
 
-  #   unless user
-  #     @invalid_password = true
-  #     @nickname = session_params[:nickname]
-  #     render :new
-  #     return
-  #   end
+    if user
+      session[:user_id] = user.id
+      redirect_to root_path
+    else
+      @invalid_password = true
+      @name = session_params[:name]
+      render :new
+      return
+    end
+  end
 
-  #   session[:user_id] = user.id
-  #   redirect_to root_path
-  # end
+  def destroy
+    session.delete(:user_id)
+    redirect_to new_session_path
+  end
 
-  # def destroy
-  #   session.delete(:user_id)
-  #   redirect_to root_path
-  # end
+  private
 
-  # private
-
-  # def session_params
-  #   params.require(:session).permit(:nickname, :password)
-  # end
+  def session_params
+    params.require(:session).permit(:name, :password)
+  end
 end
