@@ -7,6 +7,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.create!(name: "Kirill", password_digest: "123")
-Game.create!(name: "Winery team", estimates: "1,2,4", creator: User.last)
+PokerSession.create!(name: "Winery team", estimates: "1,2,4", creator: User.last)
 
 puts "Done"

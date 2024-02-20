@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :created_games, class_name: "Game", foreign_key: :creator_id
-  has_many :game_participants
-  has_many :games, through: :game_participants, source: :game
-
   NAME_LENGTH = 25
+
+  has_many :created_poker_sessions, class_name: "PokerSession", foreign_key: :creator_id
+  has_many :poker_session_participants
+  has_many :poker_sessions, through: :poker_session_participants, source: :poker_session
 
   validates :name, :password_digest, presence: true
   validates :name, uniqueness: true

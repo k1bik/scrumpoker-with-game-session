@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :game_participant do
+  factory :poker_session do
     
   end
 end

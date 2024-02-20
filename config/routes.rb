@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "games#index"
+  root "poker_sessions#index"
 
   resource :user, only: %i[show new create]
   resource :session, only: %i[new create destroy]
-  resources :games
+  resources :poker_sessions
 end
