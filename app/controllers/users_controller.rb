@@ -5,7 +5,8 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def show; end
+  def show
+  end
 
   def create
     return if params[:user][:password] != params[:user][:password_confirmation]

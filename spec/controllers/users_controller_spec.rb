@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
   describe "GET #new" do
@@ -17,7 +17,7 @@ RSpec.describe UsersController, type: :controller do
     let(:user) { create(:user) }
 
     it "renders the show template" do
-      get :show, session: { user_id: user.id }
+      get :show, session: {user_id: user.id}
       expect(response).to render_template :show
     end
   end
@@ -37,7 +37,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it "creates a new user" do
-        expect {subject}.to change(User, :count).by(1)
+        expect { subject }.to change(User, :count).by(1)
       end
 
       it "sets the user_id in session" do

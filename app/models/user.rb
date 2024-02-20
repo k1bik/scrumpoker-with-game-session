@@ -3,9 +3,9 @@ class User < ApplicationRecord
 
   NAME_LENGTH = 25
 
-  has_many :created_poker_sessions, class_name: "PokerSession", foreign_key: :creator_id
-  has_many :poker_session_participants
-  has_many :poker_sessions, through: :poker_session_participants, source: :poker_session
+  has_many :created_poker_sessions, class_name: "PokerSession", foreign_key: :creator_id, dependent: :destroy, inverse_of: :creator
+  has_many :poker_session_participants, dependent: :destroy
+  has_many :poker_sessions, through: :poker_session_participants, source: :poker_session, dependent: :destroy
 
   validates :name, :password_digest, presence: true
   validates :name, uniqueness: true

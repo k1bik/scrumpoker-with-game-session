@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  def new; end
+  def new
+  end
 
   def create
     user = User.find_by(name: session_params[:name])&.authenticate(session_params[:password])
@@ -11,7 +12,7 @@ class SessionsController < ApplicationController
       @invalid_password = true
       @name = session_params[:name]
       render :new
-      return
+      nil
     end
   end
 
