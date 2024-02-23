@@ -34,7 +34,7 @@ ru:
     sign_up: "Зарегистрироваться"
     login: "Вход"
     scrumpoker: "ScrumPoker"
-    create_new_game: "СОЗДАТЬ НОВУЮ ИГРУ"
+    create_new_game: "СОЗДАТЬ НОВУЮ СЕССИЮ"
     profile: "Профиль"
     edit_password: "Редактировать пароль"
     logout: "Выход"
@@ -51,3 +51,14 @@ ru:
     password_placeholder: "Пароль"
     dont_have_an_account: "У вас нет аккаунта?"
     create_now : "Создать сейчас"
+  new_password:
+    edit_password: "Редактировать пароль"
+    confirm: "Подтвердить"
+    old_password_label: "Старый пароль"
+    new_password_label: "Новый пароль"
+    new_password_confirmation_label: "Подтвердите новый пароль"
+  errors:
+    entities:
+      password:
+        current_password_mismatch: "Пароль должен совпадать с текущим паролем"
+        new_password_confirmation_mismatch: "Подтверждение нового пароля не совпадает"

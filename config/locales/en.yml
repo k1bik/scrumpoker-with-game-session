@@ -51,3 +51,14 @@ en:
     password_placeholder: "Password"
     dont_have_an_account: "Don't have an account?"
     create_now : "Create now"
+  new_password:
+    edit_password: "EDIT PASSWORD"
+    confirm: "Confirm"
+    old_password_label: "Old password"
+    new_password_label: "New password"
+    new_password_confirmation_label: "Confirm new password"
+  errors:
+    entities:
+      password:
+        current_password_mismatch: "The password must match the current password"
+        new_password_confirmation_mismatch: "The confirmation of the new password does not match"

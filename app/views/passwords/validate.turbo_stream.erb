@@ -1,0 +1,29 @@
+<% if @password.errors[:old_password].empty? %>
+  <%= turbo_stream.update :old_password %>
+<% end %>
+
+<% if @password.old_password.present? && @password.errors[:old_password].present? %>
+  <%= turbo_stream.update :old_password do %>
+   <%= @password.errors[:old_password].join(", ") %>
+  <% end %>
+<% end %>
+
+<% if @password.errors[:new_password].empty? %>
+  <%= turbo_stream.update :new_password %>
+<% end %>
+
+<% if @password.new_password.present? && @password.errors[:new_password].present? %>
+  <%= turbo_stream.update :new_password do %>
+   <%= @password.errors[:new_password].join(", ") %>
+  <% end %>
+<% end %>
+
+<% if @password.errors[:new_password_confirmation].empty? %>
+  <%= turbo_stream.update :new_password_confirmation %>
+<% end %>
+
+<% if @password.new_password_confirmation.present? && @password.errors[:new_password_confirmation].present? %>
+  <%= turbo_stream.update :new_password_confirmation do %>
+   <%= @password.errors[:new_password_confirmation].join(", ") %>
+  <% end %>
+<% end %>
