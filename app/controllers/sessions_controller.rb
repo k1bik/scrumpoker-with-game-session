@@ -7,10 +7,12 @@ class SessionsController < ApplicationController
 
     if user
       session[:user_id] = user.id
+      flash[:notice] = "Successfully logged in"
       redirect_to root_path
     else
       @invalid_password = true
       @name = session_params[:name]
+      flash.now[:alert] = "Invalid password"
       render :new
       nil
     end

@@ -1,0 +1,39 @@
+<% flash.each do |type, msg| %>
+  <% if :notice %>
+    <div
+      style="top: 100px"
+      class="transition transform duration-1000 hidden absolute right-10 bg-green-100 p-3 shadow-2xl flex items-center rounded-xl space-x-4"
+      data-controller="notification"
+      data-notification-delay-value="3000"
+      data-transition-enter-from="opacity-0 translate-x-6"
+      data-transition-enter-to="opacity-100 translate-x-0"
+      data-transition-leave-from="opacity-100 translate-x-0"
+      data-transition-leave-to="opacity-0 translate-x-6"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
+        <path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path><path fill="#4caf50" d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"></path>
+      </svg>
+      <span class="text-green-400"><%= msg %></span>
+    </div>
+  <% elsif "alert" %>
+   <div
+      style="top: 100px"
+      class="transition transform duration-1000 hidden absolute right-10 bg-red-100 p-3 shadow-2xl flex items-center rounded-xl space-x-4"
+      data-controller="notification"
+      data-notification-delay-value="3000"
+      data-transition-enter-from="opacity-0 translate-x-6"
+      data-transition-enter-to="opacity-100 translate-x-0"
+      data-transition-leave-from="opacity-100 translate-x-0"
+      data-transition-leave-to="opacity-0 translate-x-6"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
+        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+          <path d="M 85 90 H 5 c -2.761 0 -5 -2.238 -5 -5 V 5 c 0 -2.761 2.239 -5 5 -5 h 80 c 2.762 0 5 2.239 5 5 v 80 C 90 87.762 87.762 90 85 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(236,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+          <path d="M 25.914 69.086 c -1.28 0 -2.559 -0.488 -3.536 -1.465 c -1.953 -1.952 -1.953 -5.118 0 -7.07 l 38.172 -38.172 c 1.951 -1.952 5.119 -1.952 7.07 0 c 1.953 1.953 1.953 5.119 0 7.071 L 29.45 67.621 C 28.473 68.598 27.194 69.086 25.914 69.086 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+          <path d="M 64.086 69.086 c -1.279 0 -2.56 -0.488 -3.535 -1.465 L 22.378 29.45 c -1.953 -1.953 -1.953 -5.119 0 -7.071 c 1.953 -1.952 5.118 -1.952 7.071 0 l 38.171 38.172 c 1.953 1.952 1.953 5.118 0 7.07 C 66.646 68.598 65.365 69.086 64.086 69.086 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+        </g>
+      </svg>
+      <span class="text-red-400"><%= msg %></span>
+    </div>
+  <% end %>
+<% end %>

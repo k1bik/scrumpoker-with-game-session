@@ -9,8 +9,10 @@ class PasswordsController < ApplicationController
 
     if @password.valid?
       current_user.update!(password_digest: @password.bcrypt_password)
-      redirect_to root_path
+      flash[:notice] = "Password updated successfully"
+      redirect_to user_path
     else
+      flash.now[:alert] = "Password not successfully"
       render :new
     end
   end

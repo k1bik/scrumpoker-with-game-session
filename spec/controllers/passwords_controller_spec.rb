@@ -29,9 +29,9 @@ RSpec.describe PasswordsController, type: :controller do
         expect(current_user.authenticate("new_password")).to be_truthy
       end
 
-      it "redirects to the root path" do
+      it "redirects to the user path" do
         patch :update, params: params
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path)
       end
     end
 
