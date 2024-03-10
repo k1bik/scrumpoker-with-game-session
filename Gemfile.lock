@@ -85,6 +85,8 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -268,6 +270,7 @@ DEPENDENCIES
   bootsnap
   debug
   factory_bot_rails
+  friendly_id (~> 5.5.0)
   importmap-rails
   jbuilder
   pg (~> 1.1)

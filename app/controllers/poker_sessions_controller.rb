@@ -6,12 +6,12 @@ class PokerSessionsController < ApplicationController
   end
 
   def show
-    @poker_session = PokerSession.includes(:creator).find params[:id]
+    @poker_session = PokerSession.includes(:creator).friendly.find params[:id]
     @poker_session.participants << current_user unless @poker_session.participants.exists? current_user.id
   end
 
   def edit
-    @poker_session = PokerSession.includes(:creator).find params[:id]
+    @poker_session = PokerSession.includes(:creator).friendly.find params[:id]
   end
 
   def new
@@ -20,7 +20,7 @@ class PokerSessionsController < ApplicationController
   end
 
   def update
-    poker_session = PokerSession.find params[:id]
+    poker_session = PokerSession.friendly.find params[:id]
 
     if poker_session.update poker_session_params
       flash[:notice] = "Successfully updated"
@@ -32,7 +32,9 @@ class PokerSessionsController < ApplicationController
   end
 
   def create
-    @poker_session = PokerSession.new(poker_session_params.merge(creator: current_user))
+    friendly_name = "#{params[:poker_session][:name]}-#{Time.zone.today.strftime("%d-%m-%Y")}"
+    attrs = poker_session_params.merge(creator: current_user, friendly_name:)
+    @poker_session = PokerSession.new(attrs)
 
     if @poker_session.save
       @poker_session.participants << current_user
