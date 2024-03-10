@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_14_180257) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_09_092658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_14_180257) do
     t.index ["creator_id"], name: "index_poker_sessions_on_creator_id"
   end
 
+  create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "poker_session_id", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poker_session_id"], name: "index_tasks_on_poker_session_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "password_digest", null: false
@@ -49,8 +57,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_14_180257) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
-  add_foreign_key "participant_estimates", "poker_session_participants"
-  add_foreign_key "poker_session_participants", "poker_sessions"
-  add_foreign_key "poker_session_participants", "users"
-  add_foreign_key "poker_sessions", "users", column: "creator_id"
+  add_foreign_key "participant_estimates", "poker_session_participants", on_delete: :cascade
+  add_foreign_key "poker_session_participants", "poker_sessions", on_delete: :cascade
+  add_foreign_key "poker_session_participants", "users", on_delete: :cascade
+  add_foreign_key "poker_sessions", "users", column: "creator_id", on_delete: :cascade
+  add_foreign_key "tasks", "poker_sessions", on_delete: :cascade
 end

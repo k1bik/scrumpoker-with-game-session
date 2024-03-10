@@ -1,0 +1,43 @@
+<div class="w-[386px] rounded-3xl py-8 px-4 bg-white mx-auto">
+  <div class="px-4">
+    <%= form_with(
+      model: @poker_session,
+      url: poker_sessions_path,
+      class: "flex flex-col space-y-5",
+      data: {
+        controller: "nested-form",
+        nested_form_wrapper_selector_value: ".nested-form-wrapper"
+      }
+    ) do |f| %>
+      <template data-nested-form-target="template">
+        <%= f.fields_for :tasks, Task.new, child_index: "NEW_RECORD" do |task_fields| %>
+          <%= render "task_form", f: task_fields %>
+        <% end %>
+      </template>
+      <%= f.fields_for :tasks do |task_fields| %>
+        <%= render "task_form", f: task_fields %>
+      <% end %>
+      <div data-nested-form-target="target"></div>
+      <button type="button" data-action="nested-form#add">Add task</button>
+      <%= f.text_field :name,
+                        class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
+                        placeholder: "name",
+                        autocomplete: "off"
+      %>
+      <%= f.text_field :estimates,
+                        class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
+                        placeholder: "estimates",
+                        autocomplete: "off"
+      %>
+      <%= f.text_field :password,
+                        class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
+                        placeholder: "password",
+                        autocomplete: "off"
+      %>
+      <%= f.submit "Create",
+                  data: {turbo: false},
+                  class: "cursor-pointer px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
+      %>
+    <% end %>
+  </div>
+</div>

@@ -4,7 +4,7 @@ class CreatePokerSessions < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.string :estimates, null: false
       t.string :password_digest, null: false
-      t.references :creator, null: false, type: :uuid, foreign_key: {to_table: :users}
+      t.references :creator, null: false, type: :uuid, foreign_key: {to_table: :users, on_delete: :cascade}
 
       t.timestamps
     end

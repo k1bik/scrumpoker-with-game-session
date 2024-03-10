@@ -1,0 +1,7 @@
+<%= @poker_session.name %>
+<%= @poker_session.estimates %>
+<%= @poker_session.creator.name %>
+<h1>Participants</h1>
+<% @poker_session.participants.each do |participant| %>
+  <span class="text-xl"><%= participant.name%></span>
+<% end %>
