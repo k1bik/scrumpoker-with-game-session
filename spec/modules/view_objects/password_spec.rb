@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Password, type: :model do
+RSpec.describe ViewObjects::Password, type: :model do
   subject { described_class.new(params) }
 
   describe "validations" do

@@ -1,35 +1,68 @@
 <div class="w-full h-full bg-gradient-to-r from-gray-800 to-gray-600">
-  <div class="w-[386px] rounded-3xl py-8 px-4 bg-white mx-auto mt-40">
-    <div class="relative flex items-center mb-4">
-      <div class="flex-grow border-t border-black"></div>
-      <span class="flex-shrink mx-4 text-xl"><%= t("sign_up.sign_up") %></span>
-      <div class="flex-grow border-t border-black"></div>
-    </div>
-    <div class="px-4">
-      <%= form_with(model: @user, url: user_path, class: "flex flex-col space-y-5") do |f| %>
-        <%= f.text_field :name,
-                         class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
-                         placeholder: t("sign_up.name_placeholder"),
-                         autocomplete: "off",
-                         maxlength: User::NAME_LENGTH
+  <div class="flex items-center justify-center h-full">
+    <div class="w-[386px] rounded-3xl py-8 px-4 bg-white">
+      <div class="relative flex items-center mb-4">
+        <div class="flex-grow border-t border-black"></div>
+        <span class="flex-shrink mx-4 text-xl"><%= t("sign_up.sign_up") %></span>
+        <div class="flex-grow border-t border-black"></div>
+      </div>
+      <div class="px-4">
+        <%= form_with scope: :user,
+                      url: user_path,
+                      class: "flex flex-col space-y-2",
+                      data: {
+                        controller: "autosubmit",
+                        action: "input->autosubmit#submit"
+                      } do |f|
         %>
-        <%= f.password_field :password,
-                             class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
-                             placeholder: t("sign_up.password_placeholder")
-        %>
-        <%= f.password_field :password_confirmation,
-                             class: "rounded-md focus:ring-red-400 focus:border-red-400",
-                             placeholder: t("sign_up.password_confirmation_placeholder")
-        %>
-        <%= f.submit t("sign_up.sign_up"),
-                    data: {turbo: false},
-                    class: "cursor-pointer px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
-        %>
-        <div class="flex space-x-1 mx-auto">
-          <span><%= t("sign_up.have_already_an_account")%></span>
-          <%= link_to t("sign_up.login"), new_session_path, class: "text-red-400 underline hover:text-red-500 duration-500" %>
-        </div>
-      <% end %>
+          <div style="height: 60px" class="flex flex-col relative">
+            <%= f.text_field :name,
+                            value: @view_object&.name ? @view_object.name : nil,
+                            class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
+                            placeholder: t("sign_up.name_placeholder"),
+                            autocomplete: "off",
+                            maxlength: User::NAME_LENGTH
+            %>
+            <span id="name" class="text-red-500 text-sm absolute bottom-0">
+              <%= @view_object.errors[:name].join(", ") if @view_object&.errors && @view_object.errors[:name] %>
+            </span>
+          </div>
+          <div style="height: 60px" class="flex flex-col relative">
+            <%= f.password_field :password,
+                                value: @view_object&.password ? @view_object.password : nil,
+                                class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
+                                placeholder: t("sign_up.password_placeholder")
+            %>
+            <span id="password" class="text-red-500 text-sm absolute bottom-0">
+              <%= @view_object.errors[:password].join(", ") if @view_object&.errors && @view_object.errors[:password] %>
+            </span>
+          </div>
+          <div style="height: 60px" class="flex flex-col relative">
+            <%= f.password_field :password_confirmation,
+                                class: "rounded-md focus:ring-red-400 focus:border-red-400",
+                                placeholder: t("sign_up.password_confirmation_placeholder")
+            %>
+            <span id="password_confirmation" class="text-red-500 text-sm absolute bottom-0">
+              <%= @view_object.errors[:password_confirmation].join(", ") if @view_object&.errors && @view_object.errors[:password_confirmation] %>
+            </span>
+          </div>
+          <%= f.submit t("sign_up.sign_up"),
+                      data: {turbo: false},
+                      class: "cursor-pointer px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
+          %>
+          <%= f.button "",
+                      formaction: validate_sign_up_form_path,
+                      name: "_method",
+                      value: "get",
+                      class: "hidden",
+                      data: {autosubmit_target: "submitButton"}
+          %>
+          <div class="flex space-x-1 mx-auto">
+            <span><%= t("sign_up.have_already_an_account")%></span>
+            <%= link_to t("sign_up.login"), new_session_path, class: "text-red-400 underline hover:text-red-500 duration-500" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

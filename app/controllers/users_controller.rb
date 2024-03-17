@@ -9,17 +9,25 @@ class UsersController < ApplicationController
   end
 
   def create
-    return if params[:user][:password] != params[:user][:password_confirmation]
+    @view_object = ViewObjects::SignUp.new(user_params)
 
-    @user = User.new(name: params[:user][:name], password: params[:user][:password])
+    if @view_object.invalid?
+      render :new
+      return
+    end
+
+    @user = User.new(name: @view_object.name, password: @view_object.password)
 
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Successfully account created"
       redirect_to root_path
     else
-      flash.now[:alert] = "Invalid"
       render :new
     end
+  end
+
+  private def user_params
+    params.require(:user).permit(:name, :password, :password_confirmation)
   end
 end

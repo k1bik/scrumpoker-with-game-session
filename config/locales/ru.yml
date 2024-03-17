@@ -62,3 +62,4 @@ ru:
       password:
         current_password_mismatch: "Пароль должен совпадать с текущим паролем"
         new_password_confirmation_mismatch: "Подтверждение нового пароля не совпадает"
+        password_confirmation_mismatch: "Подтверждение пароля не совпадает"

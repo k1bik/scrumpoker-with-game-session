@@ -29,10 +29,9 @@ RSpec.describe SessionsController, type: :controller do
         expect(response).to render_template :new
       end
 
-      it "assigns the name and sets invalid_password flag" do
+      it "returns error" do
         post :create, params: {session: {name: "nonexistent_user", password: "wrong_password"}}
-        expect(assigns(:name)).to eq("nonexistent_user")
-        expect(assigns(:invalid_password)).to be_truthy
+        expect(assigns(:view_object).errors).to be_present
       end
     end
   end

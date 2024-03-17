@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
 
+  rescue_from ActiveModel::ValidationError do |exception|
+    redirect_to root_path, alert: exception.message
+  end
+
   private
 
   def authenticate_user

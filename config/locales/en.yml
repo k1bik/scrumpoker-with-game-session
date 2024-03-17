@@ -62,3 +62,4 @@ en:
       password:
         current_password_mismatch: "The password must match the current password"
         new_password_confirmation_mismatch: "The confirmation of the new password does not match"
+        password_confirmation_mismatch: "The confirmation of the password does not match"
