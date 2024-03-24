@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if @view_object.valid?
       user = User.find_by(name: @view_object.name)&.authenticate(@view_object.password)
-  
+
       if user
         session[:user_id] = user.id
         flash[:notice] = "Successfully logged in"
