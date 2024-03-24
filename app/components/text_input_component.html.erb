@@ -1,0 +1,15 @@
+<div style="height: 55px" class="flex flex-col relative">
+  <%= content_tag :input,
+                  nil,
+                  type: "text",
+                  id: @id,
+                  name: @name,
+                  value: @value,
+                  class: @classes,
+                  maxlength: @maxlength
+  %>
+
+  <p id="<%= @error_container_id %>" class="text-red-500 text-sm absolute bottom-0">
+    <%= @errors&.first %>
+  </p>
+</div>

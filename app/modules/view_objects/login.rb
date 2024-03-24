@@ -1,8 +1,12 @@
 module ViewObjects
   class Login
     include ActiveModel::Model
+    include ActiveModel::Attributes
 
-    attr_accessor :name, :password
+    attribute :name
+    attribute :password
+
+    attr_accessor :name
 
     validates_presence_of :name, :password
     validates :name, length: {maximum: User::NAME_LENGTH}

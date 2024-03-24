@@ -9,59 +9,54 @@
         <div class="flex-grow border-t border-black"></div>
       </div>
       <div class="px-4">
-        <%= form_with scope: :session,
-                      url: session_path,
-                      class: "flex flex-col gap-2",
-                      data: {
-                        controller: "autosubmit",
-                        action: "input->autosubmit#submit"
-                      } do |f|
-        %>
-          <div style="height: 60px" class="flex flex-col relative">
-            <%= f.text_field :name,
-                            value: @view_object&.name ? @view_object&.name : nil,
-                            class: "rounded-md focus:ring-red-400 focus:border-red-400",
-                            placeholder: t("login.name_placeholder"),
-                            autocomplete: "off",
-                            maxlength: User::NAME_LENGTH
-            %>
-            <span id="name" class="text-red-500 text-sm absolute bottom-0">
-              <%= @view_object.errors[:name].join(", ") if @view_object&.errors && @view_object.errors[:name] %>
-            </span>
-          </div>
-
-          <div style="height: 60px" class="flex flex-col relative">
-            <%= f.password_field :password,
-                                class: "rounded-md focus:ring-red-400 focus:border-red-400",
-                                placeholder: t("login.password_placeholder"),
-                                maxlength: User::PASSWORD_LENGTH
-
-            %>
-            <span id="password" class="text-red-500 text-sm absolute bottom-0">
-              <%= @view_object.errors[:password].join(", ") if @view_object&.errors && @view_object.errors[:password] %>
-            </span>
-          </div>
-          <%= f.submit t("login.login"),
-                      data: {turbo: false},
-                      class: "cursor-pointer px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
+        <turbo-frame id="form">
+          <%= form_with scope: :session,
+                        url: session_path,
+                        class: "flex flex-col",
+                        data: {
+                          controller: "autosubmit",
+                          action: "input->autosubmit#submit"
+                        } do |f|
           %>
-          <%= f.button "",
-                      formaction: validate_login_form_path,
-                      name: "_method",
-                      value: "get",
-                      class: "hidden",
-                      data: {autosubmit_target: "submitButton"}
-          %>
-          <div class="flex space-x-1 mx-auto">
-            <span>
-              <%= t("login.dont_have_an_account")%>
-            </span>
-            <%= link_to t("login.create_now"),
-                        new_user_path,
-                        class: "text-red-400 underline hover:text-red-500 duration-500"
+            <%= render LabelComponent.new(required: true).with_content("Name") %>
+            <%= render TextInputComponent.new(
+              error_container_id: "name",
+              name: "session[name]",
+              value: @view_model.name,
+              maxlength: User::NAME_LENGTH,
+              errors: @view_model.errors.full_messages_for(:name)
+            )%>
+
+            <%= render LabelComponent.new(required: true).with_content("Password") %>
+            <%= render PasswordInputComponent.new(
+              id: "password_input",
+              error_container_id: "password",
+              name: "session[password]",
+              maxlength: User::PASSWORD_LENGTH,
+              errors: @view_model.errors.full_messages_for(:password)
+            )%>
+
+            <%= f.submit t("login.login"),
+                        class: "mt-2 cursor-pointer px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
             %>
-          </div>
-        <% end %>
+            <%= f.button "",
+                        formaction: validate_login_form_path,
+                        name: "_method",
+                        value: "get",
+                        class: "hidden",
+                        data: {autosubmit_target: "submitButton"}
+            %>
+            <div class="flex space-x-1 mx-auto">
+              <span>
+                <%= t("login.dont_have_an_account")%>
+              </span>
+              <%= link_to t("login.create_now"),
+                          new_user_path,
+                          class: "text-red-400 underline hover:text-red-500 duration-500"
+              %>
+            </div>
+          <% end %>
+        </turbo-frame>
       </div>
     </div>
   </div>

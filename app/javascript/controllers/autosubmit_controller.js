@@ -8,6 +8,6 @@ export default class extends Controller {
 
     this.timeout = setTimeout(() => {
       this.submitButtonTarget.click()
-    }, 300)
+    }, 100)
   }
 }

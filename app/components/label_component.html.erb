@@ -1,0 +1,5 @@
+<%= content_tag(:p) do
+      concat(content) 
+      concat("<abbr class='text-red-500'> *</abbr>".html_safe) if @required
+    end
+%>

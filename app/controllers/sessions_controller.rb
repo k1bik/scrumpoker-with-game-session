@@ -1,19 +1,19 @@
 class SessionsController < ApplicationController
   def new
+    @view_model = ViewObjects::Login.new
   end
 
   def create
-    @view_object = ViewObjects::Login.new(session_params)
+    @view_model = ViewObjects::Login.new(session_params)
 
-    if @view_object.valid?
-      user = User.find_by(name: @view_object.name)&.authenticate(@view_object.password)
+    if @view_model.valid?
+      user = User.find_by(name: @view_model.name)&.authenticate(@view_model.password)
 
       if user
         session[:user_id] = user.id
-        flash[:notice] = "Successfully logged in"
-        redirect_to root_path
+        redirect_to root_path, turbo_frame: "_top", notice: "Successfully logged in"
       else
-        @view_object.errors.add(:password, "Invalid password or login")
+        @view_model.errors.add(:password, "wrong")
         render :new
       end
     else
