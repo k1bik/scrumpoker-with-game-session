@@ -1,4 +1,4 @@
-module ViewObjects
+module ViewModels
   class SignUp
     include ActiveModel::Model
 

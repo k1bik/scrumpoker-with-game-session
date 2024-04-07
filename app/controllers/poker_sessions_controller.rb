@@ -15,8 +15,7 @@ class PokerSessionsController < ApplicationController
   end
 
   def new
-    @poker_session = PokerSession.new
-    @poker_session.tasks.build
+    @view_model = ViewModels::PokerSession.new
   end
 
   def update

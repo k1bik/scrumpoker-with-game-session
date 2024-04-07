@@ -34,7 +34,7 @@ en:
     sign_up: "Sign up"
     login: "Login"
     scrumpoker: "ScrumPoker"
-    create_new_game: "CREATE NEW GAME"
+    create_new_game: "CREATE NEW SESSION"
     profile: "Profile"
     edit_password: "Edit password"
     logout: "Log out"

@@ -1,4 +1,4 @@
-module ViewObjects
+module ViewModels
   class Login
     include ActiveModel::Model
     include ActiveModel::Attributes

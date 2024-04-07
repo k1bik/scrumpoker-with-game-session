@@ -12,6 +12,4 @@ class PokerSession < ApplicationRecord
 
   validates :name, :estimates, presence: true
   validates :friendly_name, uniqueness: true
-
-  accepts_nested_attributes_for :tasks, reject_if: :all_blank, allow_destroy: true
 end

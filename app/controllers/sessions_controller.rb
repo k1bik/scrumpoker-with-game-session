@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
   def new
-    @view_model = ViewObjects::Login.new
+    @view_model = ViewModels::Login.new
   end
 
   def create
-    @view_model = ViewObjects::Login.new(session_params)
+    @view_model = ViewModels::Login.new(session_params)
 
     if @view_model.valid?
       user = User.find_by(name: @view_model.name)&.authenticate(@view_model.password)
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
         redirect_to root_path, turbo_frame: "_top", notice: "Successfully logged in"
       else
         @view_model.errors.add(:password, "wrong")
-        render :new
+        render :new, status: :unprocessable_entity
       end
     else
       render :new

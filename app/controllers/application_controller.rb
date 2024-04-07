@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     end
 
     if (other_flashes = response_options.delete(:flash))
-      flash.update(other_flashes)
+      flash.update!(other_flashes)
     end
 
     render turbo_stream: turbo_visit(location, frame: turbo_frame, action: turbo_action)

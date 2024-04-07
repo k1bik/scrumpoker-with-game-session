@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @view_object = ViewObjects::SignUp.new(user_params)
+    @view_object = ViewModels::SignUp.new(user_params)
 
     if @view_object.invalid?
       render :new
