@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class PasswordInputComponent < ViewComponent::Base
-  def initialize(id: nil, error_container_id: nil, name: nil, value: nil, classes: nil, maxlength: nil, errors: [])
+  def initialize(id:, name:, value: nil, classes: nil, maxlength: nil, errors: [])
     @id = id
-    @error_container_id = error_container_id
     @name = name
     @value = value
-    @classes = ["rounded-md focus:ring-red-400 focus:border-red-400 w-full text-sm", classes]
+    @classes = ["rounded-md focus:ring-blue-400 focus:border-blue-400 w-full text-sm", classes]
     @maxlength = maxlength
     @errors = errors
   end

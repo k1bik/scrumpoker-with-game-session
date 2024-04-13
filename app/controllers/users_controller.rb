@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user, except: [:create, :new]
 
   def new
-    @user = User.new
+    @view_model = ViewModels::SignUp.new
   end
 
   def show

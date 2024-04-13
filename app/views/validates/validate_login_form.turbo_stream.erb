@@ -1,19 +1,19 @@
 <% if @view_object.errors[:name].empty? %>
-  <%= turbo_stream.update :name %>
+  <%= turbo_stream.update :name_error %>
 <% end %>
 
 <% if @view_object.name.present? && @view_object.errors[:name].present? %>
-  <%= turbo_stream.update :name do %>
+  <%= turbo_stream.update :name_error do %>
    <%= @view_object.errors[:name].join(", ") %>
   <% end %>
 <% end %>
 
 <% if @view_object.errors[:password].empty? %>
-  <%= turbo_stream.update :password %>
+  <%= turbo_stream.update :password_error %>
 <% end %>
 
 <% if @view_object.password.present? && @view_object.errors[:password].present? %>
-  <%= turbo_stream.update :password do %>
+  <%= turbo_stream.update :password_error do %>
    <%= @view_object.errors[:password].join(", ") %>
   <% end %>
 <% end %>

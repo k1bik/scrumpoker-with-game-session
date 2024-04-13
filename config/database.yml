@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: scrumpoker_with_game_session_development
+  database: scrumpoher_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: scrumpoker_with_game_session_test
+  database: scrumpoher_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: scrumpoker_with_game_session_production
-  username: scrumpoker_with_game_session
-  password: <%= ENV["SCRUMPOKER_WITH_GAME_SESSION_DATABASE_PASSWORD"] %>
+  database: scrumpoher_production
+  username: scrumpoher
+  password: <%= ENV["SCRUMPOHER_DATABASE_PASSWORD"] %>

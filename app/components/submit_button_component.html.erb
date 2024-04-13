@@ -1,0 +1,8 @@
+  <%= content_tag :input,
+                  nil,
+                  type: "submit",
+                  name: "commit",
+                  value: @text,
+                  class: @classes,
+                  data: {disable_with: @text}
+  %>

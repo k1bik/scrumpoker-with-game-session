@@ -1,12 +1,15 @@
 <div class="w-full h-full bg-gradient-to-r from-gray-800 to-gray-600">
+
   <div class="flex items-center justify-center h-full">
-    <div class="w-[386px] rounded-3xl py-8 px-4 bg-white">
+    <div class="w-96 rounded-3xl py-8 px-4 bg-white">
       <div class="relative flex items-center mb-4">
+
         <div class="flex-grow border-t border-black"></div>
         <span class="flex-shrink mx-4 text-xl">
           <%= t("login.login") %>
         </span>
         <div class="flex-grow border-t border-black"></div>
+
       </div>
       <div class="px-4">
         <turbo-frame id="form">
@@ -18,27 +21,24 @@
                           action: "input->autosubmit#submit"
                         } do |f|
           %>
+
             <%= render LabelComponent.new(required: true).with_content("Name") %>
-            <%= render TextInputComponent.new(
-              error_container_id: "name",
-              name: "session[name]",
-              value: @view_model.name,
-              maxlength: User::NAME_LENGTH,
-              errors: @view_model.errors.full_messages_for(:name)
-            )%>
+            <%= render TextInputComponent.new id: "name",
+                                              name: "session[name]",
+                                              value: @view_model.name,
+                                              maxlength: User::NAME_LENGTH,
+                                              errors: @view_model.errors.full_messages_for(:name)
+            %>
 
             <%= render LabelComponent.new(required: true).with_content("Password") %>
-            <%= render PasswordInputComponent.new(
-              id: "password_input",
-              error_container_id: "password",
-              name: "session[password]",
-              maxlength: User::PASSWORD_LENGTH,
-              errors: @view_model.errors.full_messages_for(:password)
-            )%>
-
-            <%= f.submit t("login.login"),
-                        class: "mt-2 cursor-pointer px-12 py-2 bg-black text-white rounded-lg font-bold hover:bg-red-500 duration-500"
+            <%= render PasswordInputComponent.new id: "password",
+                                                  name: "session[password]",
+                                                  maxlength: User::PASSWORD_LENGTH,
+                                                  errors: @view_model.errors.full_messages_for(:password)
             %>
+
+            <%= render SubmitButtonComponent.new(text: "Login", classes: "mt-2") %>
+
             <%= f.button "",
                         formaction: validate_login_form_path,
                         name: "_method",
@@ -46,13 +46,15 @@
                         class: "hidden",
                         data: {autosubmit_target: "submitButton"}
             %>
-            <div class="flex space-x-1 mx-auto">
+            <div class="flex gap-1 mx-auto">
               <span>
                 <%= t("login.dont_have_an_account")%>
               </span>
-              <%= link_to t("login.create_now"),
-                          new_user_path,
-                          class: "text-red-400 underline hover:text-red-500 duration-500"
+
+              <%= render LinkComponent.new text: "Create now",
+                                           href: new_user_path,
+                                           classes: "text-blue-400 underline hover:text-blue-500 duration-300",
+                                           turbo: false
               %>
             </div>
           <% end %>

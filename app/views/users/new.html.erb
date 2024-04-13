@@ -15,18 +15,13 @@
                         action: "input->autosubmit#submit"
                       } do |f|
         %>
-          <div style="height: 60px" class="flex flex-col relative">
-            <%= f.text_field :name,
-                            value: @view_object&.name ? @view_object.name : nil,
-                            class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
-                            placeholder: t("sign_up.name_placeholder"),
-                            autocomplete: "off",
-                            maxlength: User::NAME_LENGTH
-            %>
-            <span id="name" class="text-red-500 text-sm absolute bottom-0">
-              <%= @view_object.errors[:name].join(", ") if @view_object&.errors && @view_object.errors[:name] %>
-            </span>
-          </div>
+          <%= render LabelComponent.new(required: true).with_content("Name") %>
+          <%= render TextInputComponent.new id: "name",
+                                            name: "user[name]",
+                                            value: @view_model.name,
+                                            maxlength: User::NAME_LENGTH,
+                                            errors: @view_model.errors.full_messages_for(:name)
+          %>
           <div style="height: 60px" class="flex flex-col relative">
             <%= f.password_field :password,
                                 value: @view_object&.password ? @view_object.password : nil,
