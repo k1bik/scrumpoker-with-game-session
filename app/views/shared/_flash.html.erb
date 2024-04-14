@@ -1,7 +1,7 @@
 <% flash.each do |type, msg| %>
   <% if type == "notice" %>
     <div
-      style="top: 100px"
+      style="top: 80px"
       class="transition transform duration-1000 hidden absolute right-10 bg-green-100 p-3 shadow-2xl flex items-center rounded-xl space-x-4"
       data-controller="notification"
       data-notification-delay-value="3000"
@@ -17,7 +17,7 @@
     </div>
   <% elsif type == "alert" %>
    <div
-      style="top: 100px"
+      style="top: 80px"
       class="transition transform duration-1000 hidden absolute right-10 bg-red-100 p-3 shadow-2xl flex items-center rounded-xl space-x-4"
       data-controller="notification"
       data-notification-delay-value="3000"

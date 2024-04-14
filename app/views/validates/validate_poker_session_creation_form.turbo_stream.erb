@@ -18,3 +18,12 @@
   <% end %>
 <% end %>
 
+<% if @view_model.errors[:estimates].empty? %>
+  <%= turbo_stream.update :estimates_error %>
+<% end %>
+
+<% if @view_model.estimates.present? && @view_model.errors[:estimates].present? %>
+  <%= turbo_stream.update :estimates_error do %>
+   <%= @view_model.errors[:estimates].join(", ") %>
+  <% end %>
+<% end %>

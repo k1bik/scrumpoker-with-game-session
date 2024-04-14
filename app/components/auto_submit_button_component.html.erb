@@ -1,0 +1,10 @@
+<%= content_tag :button,
+                "",
+                name: "_method",
+                type: "submit",
+                formaction: @url,
+                href: @href,
+                value: "get",
+                class: "hidden",
+                data: { autosubmit_target: "submitButton" }
+%>

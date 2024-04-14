@@ -2,24 +2,21 @@
 
   <div class="flex items-center justify-center h-full">
     <div class="w-96 rounded-3xl py-8 px-4 bg-white">
-      <div class="relative flex items-center mb-4">
 
+      <div class="relative flex items-center mb-4">
         <div class="flex-grow border-t border-black"></div>
         <span class="flex-shrink mx-4 text-xl">
           <%= t("login.login") %>
         </span>
         <div class="flex-grow border-t border-black"></div>
-
       </div>
+
       <div class="px-4">
         <turbo-frame id="form">
           <%= form_with scope: :session,
                         url: session_path,
                         class: "flex flex-col",
-                        data: {
-                          controller: "autosubmit",
-                          action: "input->autosubmit#submit"
-                        } do |f|
+                        data: {controller: "autosubmit"} do |f|
           %>
 
             <%= render LabelComponent.new(required: true).with_content("Name") %>
@@ -39,17 +36,10 @@
 
             <%= render SubmitButtonComponent.new(text: "Login", classes: "mt-2") %>
 
-            <%= f.button "",
-                        formaction: validate_login_form_path,
-                        name: "_method",
-                        value: "get",
-                        class: "hidden",
-                        data: {autosubmit_target: "submitButton"}
-            %>
+            <%= render AutoSubmitButtonComponent.new(url: validate_login_form_path) %>
+
             <div class="flex gap-1 mx-auto">
-              <span>
-                <%= t("login.dont_have_an_account")%>
-              </span>
+              <p><%= t("login.dont_have_an_account")%></p>
 
               <%= render LinkComponent.new text: "Create now",
                                            href: new_user_path,
@@ -57,9 +47,11 @@
                                            turbo: false
               %>
             </div>
+
           <% end %>
         </turbo-frame>
       </div>
+
     </div>
   </div>
 </div>

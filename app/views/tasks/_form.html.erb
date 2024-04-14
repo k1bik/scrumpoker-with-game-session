@@ -1,0 +1,9 @@
+<%= form_with scope: :task, url: poker_session_tasks_path, class: "flex flex-col" do %>
+  <%= render LabelComponent.new(required: true).with_content("Description") %>
+  <%= render TextInputComponent.new id: "description",
+                                    name: "task[description]",
+                                    value: view_model.description,
+                                    errors: view_model.errors.full_messages_for(:description)
+  %>
+  <%= render SubmitButtonComponent.new(text: "create", classes: "mt-2") %>
+<% end %>

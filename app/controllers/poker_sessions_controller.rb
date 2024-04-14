@@ -6,7 +6,7 @@ class PokerSessionsController < ApplicationController
   end
 
   def show
-    @poker_session = PokerSession.includes(:creator).friendly.find params[:id]
+    @poker_session = PokerSession.includes(:creator, :tasks).friendly.find params[:id]
     @poker_session.participants << current_user unless @poker_session.participants.exists? current_user.id
   end
 
@@ -15,39 +15,43 @@ class PokerSessionsController < ApplicationController
   end
 
   def new
-    @view_model = ViewModels::PokerSession.new
+    @view_model = ViewModels::PokerSessionCreation.new
   end
 
   def update
     poker_session = PokerSession.friendly.find params[:id]
 
     if poker_session.update poker_session_params
-      flash[:notice] = "Successfully updated"
-      redirect_to poker_session_path(poker_session)
+      redirect_to poker_session_path(poker_session), notice: "Successfully updated"
     else
-      flash.now[:alert] = "Invalid"
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def create
-    friendly_name = "#{params[:poker_session][:name]}-#{Time.zone.today.strftime("%d-%m-%Y")}"
-    attrs = poker_session_params.merge(creator: current_user, friendly_name:)
-    @poker_session = PokerSession.new(attrs)
+    @view_model = ViewModels::PokerSessionCreation.new(
+      poker_session_params.merge(
+        creator: current_user,
+        friendly_name: PokerSession.generate_friendly_name(poker_session_params[:name])
+      )
+    )
 
-    if @poker_session.save
-      @poker_session.participants << current_user
-      flash[:notice] = "Successfully created"
-      redirect_to poker_session_path(@poker_session)
+    if @view_model.valid?
+      poker_session = PokerSession.create!(
+        name: @view_model.name,
+        estimates: @view_model.estimates,
+        creator: @view_model.creator,
+        password: @view_model.password,
+        friendly_name: @view_model.friendly_name
+      )
+
+      redirect_to poker_session_path(poker_session), notice: "Successfully created"
     else
-      flash.now[:alert] = "Invalid"
-      redirect_to new_poker_session_path
+      render :new, status: :unprocessable_entity
     end
   end
 
   private def poker_session_params
-    params
-      .require(:poker_session)
-      .permit(:name, :estimates, :password, tasks_attributes: [:id, :_destroy, :description])
+    params.require(:poker_session).permit(:name, :estimates, :password)
   end
 end

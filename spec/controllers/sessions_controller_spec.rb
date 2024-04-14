@@ -31,7 +31,7 @@ RSpec.describe SessionsController, type: :controller do
 
       it "returns error" do
         post :create, params: {session: {name: "nonexistent_user", password: "wrong_password"}}
-        expect(assigns(:view_object).errors).to be_present
+        expect(assigns(:view_model).errors).to be_present
       end
     end
   end

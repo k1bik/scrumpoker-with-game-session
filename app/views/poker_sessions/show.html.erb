@@ -5,3 +5,25 @@
 <% @poker_session.participants.each do |participant| %>
   <span class="text-xl"><%= participant.name%></span>
 <% end %>
+
+<%= render LinkComponent.new text: "New task",
+                             href: new_poker_session_task_path(@poker_session),
+                             data: { turbo_frame: dom_id(Task.new) }
+%>
+
+<%= turbo_frame_tag Task.new %>
+
+<%= turbo_frame_tag "tasks" do %>
+  <div class="flex flex-col">
+    <% @poker_session.tasks.each do |task| %>
+      <div class="flex gap-8">
+        <%= turbo_frame_tag task do %>
+          <p><%= task.description %></p>
+          <%= render LinkComponent.new text: "edit",
+                                      href: edit_poker_session_task_path(@poker_session, task)
+          %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,30 +1,30 @@
-<% if @view_object.errors[:name].empty? %>
-  <%= turbo_stream.update :name %>
+<% if @view_model.errors[:name].empty? %>
+  <%= turbo_stream.update :name_error %>
 <% end %>
 
-<% if @view_object.name.present? && @view_object.errors[:name].present? %>
-  <%= turbo_stream.update :name do %>
-   <%= @view_object.errors[:name].join(", ") %>
+<% if @view_model.name.present? && @view_model.errors[:name].present? %>
+  <%= turbo_stream.update :name_error do %>
+   <%= @view_model.errors[:name].join(", ") %>
   <% end %>
 <% end %>
 
-<% if @view_object.errors[:password].empty? %>
-  <%= turbo_stream.update :password %>
+<% if @view_model.errors[:password].empty? %>
+  <%= turbo_stream.update :password_error %>
 <% end %>
 
-<% if @view_object.password.present? && @view_object.errors[:password].present? %>
-  <%= turbo_stream.update :password do %>
-   <%= @view_object.errors[:password].join(", ") %>
+<% if @view_model.password.present? && @view_model.errors[:password].present? %>
+  <%= turbo_stream.update :password_error do %>
+   <%= @view_model.errors[:password].join(", ") %>
   <% end %>
 <% end %>
 
-<% if @view_object.errors[:password_confirmation].empty? %>
-  <%= turbo_stream.update :password_confirmation %>
+<% if @view_model.errors[:password_confirmation].empty? %>
+  <%= turbo_stream.update :password_confirmation_error %>
 <% end %>
 
-<% if @view_object.password_confirmation.present? && @view_object.errors[:password_confirmation].present? %>
-  <%= turbo_stream.update :password_confirmation do %>
-   <%= @view_object.errors[:password_confirmation].join(", ") %>
+<% if @view_model.password_confirmation.present? && @view_model.errors[:password_confirmation].present? %>
+  <%= turbo_stream.update :password_confirmation_error do %>
+   <%= @view_model.errors[:password_confirmation].join(", ") %>
   <% end %>
 <% end %>
 

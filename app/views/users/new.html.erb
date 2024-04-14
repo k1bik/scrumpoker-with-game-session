@@ -1,63 +1,65 @@
 <div class="w-full h-full bg-gradient-to-r from-gray-800 to-gray-600">
+
   <div class="flex items-center justify-center h-full">
-    <div class="w-[386px] rounded-3xl py-8 px-4 bg-white">
+    <div class="w-96 rounded-3xl py-8 px-4 bg-white">
+
       <div class="relative flex items-center mb-4">
         <div class="flex-grow border-t border-black"></div>
-        <span class="flex-shrink mx-4 text-xl"><%= t("sign_up.sign_up") %></span>
+        <span class="flex-shrink mx-4 text-xl">
+          <%= t("sign_up.sign_up") %>
+        </span>
         <div class="flex-grow border-t border-black"></div>
       </div>
+
       <div class="px-4">
-        <%= form_with scope: :user,
-                      url: user_path,
-                      class: "flex flex-col space-y-2",
-                      data: {
-                        controller: "autosubmit",
-                        action: "input->autosubmit#submit"
-                      } do |f|
-        %>
-          <%= render LabelComponent.new(required: true).with_content("Name") %>
-          <%= render TextInputComponent.new id: "name",
-                                            name: "user[name]",
-                                            value: @view_model.name,
-                                            maxlength: User::NAME_LENGTH,
-                                            errors: @view_model.errors.full_messages_for(:name)
+        <turbo-frame id="form">
+
+          <%= form_with scope: :user,
+                        url: user_path,
+                        class: "flex flex-col",
+                        data: {controller: "autosubmit"} do |f|
           %>
-          <div style="height: 60px" class="flex flex-col relative">
-            <%= f.password_field :password,
-                                value: @view_object&.password ? @view_object.password : nil,
-                                class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
-                                placeholder: t("sign_up.password_placeholder")
+
+            <%= render LabelComponent.new(required: true).with_content("Name") %>
+            <%= render TextInputComponent.new id: "name",
+                                              name: "user[name]",
+                                              value: @view_model.name,
+                                              maxlength: User::NAME_LENGTH,
+                                              errors: @view_model.errors.full_messages_for(:name)
             %>
-            <span id="password" class="text-red-500 text-sm absolute bottom-0">
-              <%= @view_object.errors[:password].join(", ") if @view_object&.errors && @view_object.errors[:password] %>
-            </span>
-          </div>
-          <div style="height: 60px" class="flex flex-col relative">
-            <%= f.password_field :password_confirmation,
-                                class: "rounded-md focus:ring-red-400 focus:border-red-400",
-                                placeholder: t("sign_up.password_confirmation_placeholder")
+
+            <%= render LabelComponent.new(required: true).with_content("Password") %>
+            <%= render PasswordInputComponent.new id: "password",
+                                                  name: "user[password]",
+                                                  maxlength: User::PASSWORD_LENGTH,
+                                                  errors: @view_model.errors.full_messages_for(:password)
             %>
-            <span id="password_confirmation" class="text-red-500 text-sm absolute bottom-0">
-              <%= @view_object.errors[:password_confirmation].join(", ") if @view_object&.errors && @view_object.errors[:password_confirmation] %>
-            </span>
-          </div>
-          <%= f.submit t("sign_up.sign_up"),
-                      data: {turbo: false},
-                      class: "cursor-pointer px-12 py-2 bg-red-400 text-white rounded-lg font-bold hover:bg-red-500 duration-500"
-          %>
-          <%= f.button "",
-                      formaction: validate_sign_up_form_path,
-                      name: "_method",
-                      value: "get",
-                      class: "hidden",
-                      data: {autosubmit_target: "submitButton"}
-          %>
-          <div class="flex space-x-1 mx-auto">
-            <span><%= t("sign_up.have_already_an_account")%></span>
-            <%= link_to t("sign_up.login"), new_session_path, class: "text-red-400 underline hover:text-red-500 duration-500" %>
-          </div>
-        <% end %>
+
+            <%= render LabelComponent.new(required: true).with_content("Confirm password") %>
+            <%= render PasswordInputComponent.new id: "password_confirmation",
+                                                  name: "user[password_confirmation]",
+                                                  maxlength: User::PASSWORD_LENGTH,
+                                                  errors: @view_model.errors.full_messages_for(:password_confirmation)
+            %>
+
+            <%= render SubmitButtonComponent.new(text: "Sign up", classes: "mt-2") %>
+
+            <%= render AutoSubmitButtonComponent.new(url: validate_sign_up_form_path) %>
+
+            <div class="flex space-x-1 mx-auto">
+              <p><%= t("sign_up.have_already_an_account")%></p>
+              <%= render LinkComponent.new text: "Login",
+                                          href: new_session_path,
+                                          classes: "text-blue-400 underline hover:text-blue-500 duration-300",
+                                          turbo: false
+              %>
+            </div>
+
+          <% end %>
+        </turbo-frame>
       </div>
+
     </div>
   </div>
+
 </div>

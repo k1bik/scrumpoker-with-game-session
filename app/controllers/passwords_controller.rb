@@ -5,11 +5,11 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    @view_object =
+    @view_model =
       ViewModels::Password.new(password_params.merge(current_password_digest: current_user.password_digest))
 
-    if @view_object.valid?
-      current_user.update!(password_digest: @view_object.bcrypt_password)
+    if @view_model.valid?
+      current_user.update!(password_digest: @view_model.bcrypt_password)
       redirect_to user_path, turbo_frame: "_top", notice: "Password updated successfully"
     else
       render :new

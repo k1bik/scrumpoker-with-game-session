@@ -24,17 +24,17 @@
                 <span><%= t("new_password.old_password_label") %></span>
                 <span class="text-red-500">*</span>
               <% end %>
-              <% if @view_object&.old_password %>
+              <% if @view_model&.old_password %>
                 <%= f.password_field(
                   :old_password,
-                  value: @view_object.old_password,
+                  value: @view_model.old_password,
                   class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full",
                 ) %>
               <% else %>
                 <%= f.password_field :old_password, class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full" %>
               <% end %>
               <span id="old_password" class="text-red-500 text-sm absolute bottom-0">
-                <%= @view_object.errors[:old_password].join(", ") if @view_object&.errors && @view_object.errors[:old_password] %>
+                <%= @view_model.errors[:old_password].join(", ") if @view_model&.errors && @view_model.errors[:old_password] %>
               </span>
             </div>
 
@@ -43,17 +43,17 @@
                 <span><%= t("new_password.new_password_label") %></span>
                 <span class="text-red-500">*</span>
               <% end %>
-              <% if @view_object&.new_password %>
+              <% if @view_model&.new_password %>
                 <%= f.password_field(
                   :new_password,
-                  value: @view_object.new_password,
+                  value: @view_model.new_password,
                   class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full"
                 ) %>
               <% else %>
                 <%= f.password_field :new_password, class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full" %>
               <% end %>
               <span id="new_password" class="text-red-500 text-sm absolute bottom-0">
-                <%= @view_object.errors[:new_password].join(", ") if @view_object&.errors && @view_object.errors[:new_password] %>
+                <%= @view_model.errors[:new_password].join(", ") if @view_model&.errors && @view_model.errors[:new_password] %>
               </span>
             </div>
 
@@ -62,10 +62,10 @@
                 <span><%= t("new_password.new_password_confirmation_label") %></span>
                 <span class="text-red-500">*</span>
               <% end %>
-              <% if @view_object&.new_password_confirmation %>
+              <% if @view_model&.new_password_confirmation %>
                 <%= f.password_field(
                   :new_password_confirmation,
-                  value: @view_object.new_password_confirmation,
+                  value: @view_model.new_password_confirmation,
                   class: "rounded-md focus:ring-red-400 focus:border-red-400 w-full"
                 ) %>
               <% else %>
@@ -75,7 +75,7 @@
                 ) %>
               <% end %>
               <span id="new_password_confirmation" class="text-red-500 text-sm absolute bottom-0">
-                <%= @view_object.errors[:new_password_confirmation].join(", ") if @view_object&.errors && @view_object.errors[:new_password_confirmation] %>
+                <%= @view_model.errors[:new_password_confirmation].join(", ") if @view_model&.errors && @view_model.errors[:new_password_confirmation] %>
               </span>
             </div>
             <%= f.submit(

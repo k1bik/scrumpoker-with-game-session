@@ -9,21 +9,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @view_object = ViewModels::SignUp.new(user_params)
+    @view_model = ViewModels::SignUp.new(user_params)
 
-    if @view_object.invalid?
-      render :new
-      return
-    end
+    if @view_model.valid?
+      @user = User.create!(name: @view_model.name, password: @view_model.password)
 
-    @user = User.new(name: @view_object.name, password: @view_object.password)
-
-    if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Successfully account created"
-      redirect_to root_path
+      redirect_to root_path, notice: "Successfully account created"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

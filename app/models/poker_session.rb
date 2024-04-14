@@ -12,4 +12,8 @@ class PokerSession < ApplicationRecord
 
   validates :name, :estimates, presence: true
   validates :friendly_name, uniqueness: true
+
+  def self.generate_friendly_name(name)
+    "#{name}-#{Time.zone.today.strftime("%d-%m-%Y")}"
+  end
 end
